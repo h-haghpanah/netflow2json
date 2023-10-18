@@ -19,8 +19,8 @@ To get started with the Netflow Traffic Analysis code, follow these installation
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/netflow-traffic-analysis.git
-   cd netflow-traffic-analysis
+   git clone https://github.com/yourusername/https://github.com/h-haghpanah/Netflow_V9_Traffic_Analysis.git
+   cd Netflow_V9_Traffic_Analysis
    ```
 
 2. **Install Dependencies**
