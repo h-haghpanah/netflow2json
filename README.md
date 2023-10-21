@@ -39,7 +39,7 @@ You can configure the package by specifying the `web_port`, `netflow_port`, and 
 - **`web_port`**: Specify the port of web accessible json results.
 
  ```ini
-  web_port = 2055
+  web_port = 80
   ```
 
 
@@ -58,13 +58,13 @@ This project is licensed under the MIT License
 
 ## Project Repository
 
-Visit the [GitHub repository](https://github.com/h-haghpanah/Netflow_V9_Traffic_Analysis) for the latest updates and to contribute.
+Visit the [GitHub repository](https://github.com/h-haghpanah/netflow2json) for the latest updates and to contribute.
 
 ## Bug Tracker
 
-If you encounter any issues or want to report a bug, please visit the [Bug Tracker](https://github.com/h-haghpanah/Netflow_V9_Traffic_Analysis/issues).
+If you encounter any issues or want to report a bug, please visit the [Bug Tracker](https://github.com/h-haghpanah/netflow2json/issues).
 
 ## Contact Information
 
 For questions or support, you can reach out to the author at h.haghpanah@outlook.com.
-```
+
