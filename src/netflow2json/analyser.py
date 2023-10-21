@@ -1,28 +1,16 @@
-# from tools import get_traffic_type, is_netflow_9, is_valid_port, clean_up_ip_ranges
-from tools import Validator,CleanUp,TrafficType
-import traffic
+from . import Validator,TrafficType,web,traffic
 import netflow
 import socket
 from netaddr import IPAddress
-import web
 import ipaddress
-import configparser
-import os
 import sys
 
 class NetflowProcessor:
-    def __init__(self):
-        # Initialize the configuration
-        dirname = os.path.dirname(__file__)
-        config = configparser.RawConfigParser()
-        config_path = os.path.join(dirname, "./config.ini")
-        config.read(config_path)
-
-        # Extract configuration values
-        self.local_ip_ranges = CleanUp.ip_ranges(config.get("Network", "ranges").split(","))
-        self.netflow_port = int(config.get("Netflow", "port"))
+    def __init__(self,web_port,netflow_port,local_ip_ranges):
+        self.local_ip_ranges = local_ip_ranges
+        self.netflow_port = netflow_port
         self.is_netflow_port_valid = Validator.is_valid_port(self.netflow_port)
-        self.web_port = config.get("Web", "port")
+        self.web_port = web_port
         self.is_web_port_valid = Validator.is_valid_port(self.web_port)
         self.templates = {"netflow": {}}
         self.sequence = None
@@ -30,10 +18,10 @@ class NetflowProcessor:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.bind(("0.0.0.0", self.netflow_port))
 
-    def process_netflow(self):
+    def start(self):
         try:
             if self.is_web_port_valid and self.is_netflow_port_valid:
-                web.start_web_service()
+                web.start_web_service(self.web_port)
                 while True:
                     payload, client = self.sock.recvfrom(4096)
                     try:
@@ -100,6 +88,4 @@ class NetflowProcessor:
         except:
             sys.exit(0)
 
-if __name__ == "__main__":
-    processor = NetflowProcessor()
-    processor.process_netflow()
+

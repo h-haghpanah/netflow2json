@@ -1,17 +1,9 @@
 import flask
 import threading
-import traffic
+from . import traffic
 from flask import jsonify
-import os
-import configparser
-
 
 app = flask.Flask("Accounting")
-dirname = os.path.dirname(__file__)
-config = configparser.RawConfigParser()
-config_path = os.path.join(dirname,"./config.ini")
-config.read(config_path)
-web_port = int(config.get("Web","port"))
 
 
 @app.route('/', methods=['GET'])
@@ -26,10 +18,10 @@ def api():
     return jsonify(new_traffic_list)
 
 
-def start_web_service():
-    WebService = threading.Thread(target=run)
+def start_web_service(port):
+    WebService = threading.Thread(target=run, args=(port,))
     WebService.setDaemon(True)
     WebService.start()
 
-def run():
-    app.run(host='0.0.0.0', port=web_port, debug=True, use_reloader=False)
+def run(port):
+    app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)
