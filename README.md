@@ -54,7 +54,7 @@ processor.start()
 
 ### Netflow Sender Example (Mikrotik TrafficFlow)
 
-
+![Mikrotik TrafficFlow Config](/screenshots/mikrotik_traffic_flow_example.jpg)
 
 ## License
 
